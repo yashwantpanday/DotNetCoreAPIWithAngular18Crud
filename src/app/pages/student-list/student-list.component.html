@@ -1,0 +1,156 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4 text-primary">Student List</h2>
+
+  <!-- Success Message (if any) -->
+  <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ successMessage }}
+    <button type="button" class="close" (click)="clearMessage()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <!-- Form for Add/Update -->
+  <form (ngSubmit)="onSubmit()" #studentForm="ngForm" class="mb-4 p-4 border rounded shadow-sm" style="background-color: #f8f9fa;">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="studentName" class="text-info">Name</label>
+          <input
+            type="text"
+            id="studentName"
+            class="form-control"
+            [(ngModel)]="formModel.studentName"
+            name="studentName"
+            required
+            placeholder="Enter student name"
+            style="border-color: #007bff;"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="studentGender" class="text-info">Gender</label>
+          <input
+            type="text"
+            id="studentGender"
+            class="form-control"
+            [(ngModel)]="formModel.studentGender"
+            name="studentGender"
+            required
+            placeholder="Enter gender"
+            style="border-color: #007bff;"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="age" class="text-info">Age</label>
+          <input
+            type="number"
+            id="age"
+            class="form-control"
+            [(ngModel)]="formModel.age"
+            name="age"
+            required
+            placeholder="Enter age"
+            style="border-color: #007bff;"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="standard" class="text-info">Standard</label>
+          <input
+            type="text"
+            id="standard"
+            class="form-control"
+            [(ngModel)]="formModel.standard"
+            name="standard"
+            required
+            placeholder="Enter standard"
+            style="border-color: #007bff;"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="fatherName" class="text-info">Father Name</label>
+          <input
+            type="text"
+            id="fatherName"
+            class="form-control"
+            [(ngModel)]="formModel.fatherName"
+            name="fatherName"
+            required
+            placeholder="Enter father's name"
+            style="border-color: #007bff;"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Button Container for Add/Update and Clear -->
+    <div class="d-flex justify-content-center mt-4">
+      <button
+        type="submit"
+        class="btn btn-success w-5 mx-2"
+      >
+        {{ formModel.id ? 'Update' : 'Add' }} Student
+      </button>
+      <button
+        type="button"
+        class="btn btn-danger w-5 mx-2"
+        (click)="resetForm()"
+      >
+        Clear
+      </button>
+    </div>
+  </form>
+
+  <!-- Student Table -->
+  <table class="table table-bordered table-striped table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Age</th>
+        <th>Standard</th>
+        <th>Father Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students" class="text-dark">
+        <td>{{ student.id }}</td>
+        <td>{{ student.studentName }}</td>
+        <td>{{ student.studentGender }}</td>
+        <td>{{ student.age }}</td>
+        <td>{{ student.standard }}</td>
+        <td>{{ student.fatherName }}</td>
+        <td>
+          <button
+            class="btn btn-warning btn-sm"
+            (click)="editStudent(student)"
+          >
+            Edit
+          </button>
+          <button
+            class="btn btn-danger btn-sm ml-3"
+            (click)="deleteStudent(student.id)"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
